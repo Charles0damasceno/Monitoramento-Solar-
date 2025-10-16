@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  solar-monitoring:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./backups:/app/backups
+      - ./.env:/app/.env
+    environment:
+      - DATABASE_URL=sqlite:///./data/solar_monitoring.db
+    restart: unless-stopped
+    networks:
+      - solar-network
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - solar-network
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: solar_monitoring
+      POSTGRES_USER: solar_user
+      POSTGRES_PASSWORD: solar_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - solar-network
+
+volumes:
+  redis-data:
+  postgres-data:
+
+networks:
+  solar-network:
+    driver: bridge

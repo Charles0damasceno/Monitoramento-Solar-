@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-10-16T11:16:05.796281",
+  "inverter": {
+    "power_output": 2605,
+    "energy_daily": 260.5,
+    "voltage_dc": 377.9,
+    "current_dc": 7.44,
+    "voltage_ac": 228.3,
+    "current_ac": 11.84,
+    "frequency": 60.09,
+    "temperature": 37.9,
+    "efficiency": 91.2,
+    "status": "Normal",
+    "fault_code": 0,
+    "uptime": 2722
+  },
+  "logger": {
+    "connection_status": 1,
+    "last_data_sync": "2025-10-16T11:16:05.796281",
+    "error_count": 0,
+    "signal_quality": 90
+  },
+  "location": "solar_farm_1"
+}
